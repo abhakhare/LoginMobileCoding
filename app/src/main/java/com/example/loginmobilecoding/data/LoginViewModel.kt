@@ -1,6 +1,7 @@
 package com.example.loginmobilecoding.data
 
 
+import android.annotation.SuppressLint
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -11,8 +12,11 @@ import com.example.loginmobilecoding.Model.User
 
 
 
+
 class LoginViewModel (private val listener:LoginResultCallBacks):ViewModel(){
     private val user:User
+
+
 
     init {
         this.user = User("","")
@@ -29,6 +33,12 @@ class LoginViewModel (private val listener:LoginResultCallBacks):ViewModel(){
             if(loginCode==-1){
                 listener.onSuccessbutton()
             }else{
+
+                if (loginCode == 0){
+                    listener.onError("Please enter your user name")}
+                else if (loginCode == 1){
+
+                    listener.onError("Enter proper user name")}
                 listener.onErrorbutton()
             }
 
@@ -55,6 +65,13 @@ class LoginViewModel (private val listener:LoginResultCallBacks):ViewModel(){
                 if(loginCode==-1){
                     listener.onSuccessbutton()
                 }else{
+                    if (loginCode == 2){
+                    listener.onError("Please enter Password")}
+                 if (loginCode == 3){
+                     listener.onError("Password not meeting the criteria")}
+                else if (loginCode == 4){
+                    listener.onError("Password not meeting the criteria")}
+
                     listener.onErrorbutton()
                 }
             }
@@ -68,14 +85,11 @@ class LoginViewModel (private val listener:LoginResultCallBacks):ViewModel(){
             }
 
         }
-
-
     //create function to process Login Button clicked
     fun onLoginClicked(v: View){
 
         var loginCode:Int = user.isDataValid()
         if (loginCode == 0){
-
             listener.onError("Please enter your user name")}
         else if (loginCode == 1){
 
@@ -87,10 +101,8 @@ class LoginViewModel (private val listener:LoginResultCallBacks):ViewModel(){
 
             listener.onError("Password not meeting the criteria")}
         else if (loginCode == 4){
-
             listener.onError("Password not meeting the criteria")}
         else{
-
             listener.onSuccess("Authentication has been successful",user.getEmail())
         }
     }

@@ -2,29 +2,51 @@ package com.example.loginmobilecoding.Model
 
 
 import android.text.TextUtils
-import android.util.Patterns
 import androidx.databinding.BaseObservable
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class User (private var email: String, private  var password: String): BaseObservable() {
+class User(private var email: String, private var password: String): BaseObservable() {
 
 
     fun isDataValid():Int{
+
         if (TextUtils.isEmpty(getEmail()))
             return  0
-        else if (!Patterns.EMAIL_ADDRESS.matcher(getEmail()).matches())
+        else if (!isValidUsername(getEmail().toString().trim()))
             return  1
         else if (TextUtils.isEmpty(getPassword()))
             return  2
-        else if (getPassword().length<6)
+        else if (getPassword().length<5)
             return 3
-        else if (!isValidPassword(getPassword()))
+        else if (!isValidPassword(getPassword().toString().trim()))
             return 4
         else
             return -1
     }
+    private  fun isValidUsername(name: String?): Boolean {
 
+        // Regex to check valid username.
+        val regex =   "^(?=.*[a-zA-Z])(?=.*[0-9])[A-Za-z0-9]+$";
+
+        // Compile the ReGex
+        val p = Pattern.compile(regex)
+
+        // If the username is empty
+        // return false
+        if (name == null) {
+            return false
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given username
+        // and regular expression.
+        val m = p.matcher(name)
+
+        // Return if the username
+        // matched the ReGex
+        return m.matches()
+    }
     private fun isValidPassword(password: String): Boolean {
         val pattern: Pattern
         val matcher: Matcher

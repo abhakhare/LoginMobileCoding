@@ -12,8 +12,8 @@ class HomeActivity :AppCompatActivity() {
         var strUser: String? = intent.getStringExtra("Username")
         System.out.println(strUser)
         if (strUser != null) {
-            val username =   strUser.substringBefore(delimiter = "@", missingDelimiterValue = "Usernmae Not Found")
-            textdetails.setText("Hello"+" "+username)
+
+            textdetails.setText("Hello"+" "+strUser)
         }
 
     }
