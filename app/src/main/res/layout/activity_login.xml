@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    <variable type="com.example.loginmobilecoding.data.LoginViewModel"
+        name="loginviewModel"/>
+
+</data>
+
+
+    <RelativeLayout tools:context=".View.LoginActivity"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:layout_centerHorizontal="true"
+            android:text="Login Page"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/purple_700"/>
+
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+
+
+        <EditText android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:addTextChangedListener="@{loginviewModel.emailTextWatcher}"
+        android:padding="8dp"
+        android:layout_margin="10dp"
+        android:inputType="textEmailAddress"
+        android:hint="Username"
+            android:textColorHint="@android:color/darker_gray"
+        android:textColor="@color/black"
+        android:background="@drawable/edittext"
+        android:id="@+id/edt_email"/>
+
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:addTextChangedListener="@{loginviewModel.passwordTextWatcher}"
+        android:padding="8dp"
+        android:layout_margin="10dp"
+        android:inputType="textPassword"
+        android:hint="Password"
+        android:background="@drawable/edittext"
+        android:textColorHint="@android:color/darker_gray"
+        android:textColor="@color/black"
+        android:id="@+id/edt_password"/>
+
+    <Button android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/btn_login"
+        android:layout_margin="10dp"
+        android:background="@drawable/logintext"
+        android:onClick="@{loginviewModel::onLoginClicked}"
+        android:enabled="true" android:text="Login"/>
+
+</LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</layout>
